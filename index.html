@@ -1,0 +1,425 @@
+﻿<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Penzion Žižka v centru Chrudimi. Ubytování ve 2 až 4 lůžkových pokojích s vlastním sociálním zařízením.">
+    <title>Penzion Žižka | ubytování v centru Chrudimi</title>
+    <link rel="icon" href="assets/favicon.svg?v=3" type="image/svg+xml">
+    <link rel="icon" href="assets/favicon.png?v=3" type="image/png">
+    <link rel="apple-touch-icon" href="assets/favicon.png?v=3">
+    <link rel="shortcut icon" href="assets/favicon.png?v=3" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="container topbar__inner">
+        <div class="topbar__contact">
+          <a href="tel:+420777210156">+420 777 210 156</a>
+        </div>
+        <div class="topbar__actions">
+          <span>Ubytování v centru Chrudimi za bezkonkurenční ceny</span>
+          <div class="currency-switch" aria-label="Přepnout měnu">
+            <button type="button" class="is-active" data-currency="czk" aria-pressed="true">Kč</button>
+            <button type="button" data-currency="eur" aria-pressed="false">€</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <header class="site-header" id="top">
+      <div class="container site-header__inner">
+        <a class="brand" href="#top" data-scroll-target="top" aria-label="Penzion Žižka">
+          <img class="brand__logo" src="assets/logo-zizka-transparent.png" alt="Penzion Žižka">
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span class="sr-only">Otevřít menu</span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="Hlavní navigace">
+          <ul>
+            <li><a href="#top" data-scroll-target="top">Domů</a></li>
+            <li class="has-dropdown"><a href="#pokoje" data-scroll-target="pokoje">Ubytování</a></li>
+            <li><a href="#galerie" data-scroll-target="galerie">Galerie</a></li>
+            <li><a href="#o-nas" data-scroll-target="o-nas">O nás</a></li>
+            <li><a href="vylety/">Výlety</a></li>
+            <li><a href="#kontakt" data-scroll-target="kontakt">Kontakt</a></li>
+          </ul>
+        </nav>
+        <a class="header-cta" href="#rezervace" data-scroll-target="rezervace">Poptávka rezervace</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-label="Úvodní sekce">
+        <div class="hero__media" style="background-image: url('assets/hero-zizka-ai-thematic.png');"></div>
+        <div class="hero__overlay"></div>
+        <div class="container hero__content">
+          <h1>Penzion Žižka v samém středu Chrudimi</h1>
+          <p class="hero__lead">Nově zrekonstruované ubytování nedaleko centra města, pěší zóny, obchodů a historických památek.</p>
+          <div class="hero__actions">
+            <a class="btn btn-primary" href="#pokoje" data-scroll-target="pokoje">Zobrazit pokoje</a>
+            <a class="btn btn-outline btn-outline--light" href="#kontakt" data-scroll-target="kontakt">Kontaktovat penzion</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="booking-wrap" id="rezervace" aria-label="Poptávkový panel">
+        <div class="container">
+          <form class="booking-panel" id="booking-form" novalidate>
+            <div class="booking-date">
+              <span class="booking-panel__label">Termín pobytu</span>
+              <button class="date-trigger" id="date-trigger" type="button" aria-expanded="false" aria-controls="booking-calendar">
+                <span id="date-trigger-text">Vyberte příjezd a odjezd</span>
+              </button>
+              <input type="hidden" name="datum_prijezdu" id="booking-arrival" required>
+              <input type="hidden" name="datum_odjezdu" id="booking-departure" required>
+              <div class="date-picker" id="booking-calendar" hidden>
+                <div class="date-picker__header">
+                  <button type="button" class="calendar-nav" data-calendar-prev aria-label="Předchozí měsíc">‹</button>
+                  <strong id="calendar-title"></strong>
+                  <button type="button" class="calendar-nav" data-calendar-next aria-label="Další měsíc">›</button>
+                </div>
+                <div class="date-picker__weekdays" aria-hidden="true">
+                  <span>Po</span>
+                  <span>Út</span>
+                  <span>St</span>
+                  <span>Čt</span>
+                  <span>Pá</span>
+                  <span>So</span>
+                  <span>Ne</span>
+                </div>
+                <div class="date-picker__grid" id="calendar-grid"></div>
+                <div class="date-picker__footer">
+                  <button type="button" class="date-picker__clear" id="calendar-clear">Vymazat</button>
+                  <button type="button" class="date-picker__done" id="calendar-done">Hotovo</button>
+                </div>
+              </div>
+            </div>
+            <label class="guest-picker">
+              <span class="booking-panel__label">Počet osob</span>
+              <div class="guest-stepper">
+                <button class="guest-stepper__button" type="button" data-guests-minus aria-label="Snížit počet osob">−</button>
+                <span class="guest-stepper__value">
+                  <span><span id="guests-value">2</span> osoby</span>
+                </span>
+                <button class="guest-stepper__button" type="button" data-guests-plus aria-label="Zvýšit počet osob">+</button>
+              </div>
+              <input type="hidden" name="pocet_osob" id="booking-guests" value="2">
+            </label>
+            <div class="room-picker" data-room-picker>
+              <span class="booking-panel__label" id="room-picker-label">Typ pokoje</span>
+              <button class="room-picker__trigger" id="room-picker-trigger" type="button" aria-expanded="false" aria-controls="room-picker-options" aria-labelledby="room-picker-label room-picker-text">
+                <span id="room-picker-text">Vyberte pokoj</span>
+                <span class="room-picker__chevron" aria-hidden="true"></span>
+              </button>
+              <input type="hidden" name="typ_pokoje" id="booking-room" required>
+              <div class="room-picker__options" id="room-picker-options" role="listbox" aria-labelledby="room-picker-label" hidden>
+                <button type="button" role="option" aria-selected="false" data-room-value="Dvoulůžkový pokoj">
+                  <span class="room-picker__option-main">
+                    <strong>Dvoulůžkový pokoj</strong>
+                    <span>Pro páry a kratší pobyty</span>
+                  </span>
+                  <span class="room-picker__option-meta">2 osoby · 600 Kč / noc</span>
+                </button>
+                <button type="button" role="option" aria-selected="false" data-room-value="Třílůžkový pokoj">
+                  <span class="room-picker__option-main">
+                    <strong>Třílůžkový pokoj</strong>
+                    <span>Praktická volba pro rodinu</span>
+                  </span>
+                  <span class="room-picker__option-meta">3 osoby · 750 Kč / noc</span>
+                </button>
+                <button type="button" role="option" aria-selected="false" data-room-value="Čtyřlůžkový pokoj">
+                  <span class="room-picker__option-main">
+                    <strong>Čtyřlůžkový pokoj</strong>
+                    <span>Více prostoru pro skupinu</span>
+                  </span>
+                  <span class="room-picker__option-meta">4 osoby · 1 000 Kč / noc</span>
+                </button>
+              </div>
+            </div>
+            <div class="booking-services" role="group" aria-labelledby="breakfast-label">
+              <span class="booking-panel__label" id="breakfast-label">Snídaně</span>
+              <label class="breakfast-toggle">
+                <input type="checkbox" name="snidane" id="booking-breakfast" value="Ano" aria-label="Přidat snídani k pobytu">
+                <span class="breakfast-toggle__price" id="breakfast-price" data-price-czk="60" data-price-prefix="+">+120 Kč / den</span>
+              </label>
+            </div>
+            <button class="btn btn-primary booking-panel__submit" type="submit">Odeslat poptávku</button>
+
+            <p class="form-message" id="booking-message" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="amenities" id="vybaveni">
+        <div class="container amenities__grid">
+          <article class="amenity">
+            <svg class="amenity__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3.8" y="5" width="16.4" height="11" rx="2"></rect>
+              <path d="M8 20h8"></path>
+              <path d="M12 16v4"></path>
+              <path d="M8 8.5h8"></path>
+            </svg>
+            <h3>TV, satelit a internet</h3>
+            <p>V každém pokoji je kabelová TV, satelit a připojení k internetu.</p>
+          </article>
+          <article class="amenity">
+            <svg class="amenity__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="4" y="3.8" width="16" height="16.4" rx="2.4"></rect>
+              <path d="M9 17V7h4.2a3.1 3.1 0 0 1 0 6.2H9"></path>
+            </svg>
+            <h3>Parkování</h3>
+            <p>Možnost parkování v blízkosti penzionu i přes umístění u pěší zóny.</p>
+          </article>
+          <article class="amenity">
+            <svg class="amenity__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 8.5h9.5v4.8a4.8 4.8 0 0 1-4.8 4.8h0A4.8 4.8 0 0 1 6 13.3V8.5Z"></path>
+              <path d="M15.5 10h1.8a2.3 2.3 0 0 1 0 4.6h-1.8"></path>
+              <path d="M7.2 20.5h10.6"></path>
+              <path d="M8.5 3.8v2"></path>
+              <path d="M12.5 3.8v2"></path>
+            </svg>
+            <h3>Snídaně</h3>
+            <p>Snídaně je možné objednat za 60 Kč na osobu.</p>
+          </article>
+          <article class="amenity">
+            <svg class="amenity__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 11a7 7 0 0 1 14 0Z"></path>
+              <path d="M12 4V2.8"></path>
+              <path d="M8.2 14.2v.01"></path>
+              <path d="M11 15.8v.01"></path>
+              <path d="M13.8 14.2v.01"></path>
+              <path d="M7.5 18.2v.01"></path>
+              <path d="M12 19.2v.01"></path>
+              <path d="M16.5 18.2v.01"></path>
+            </svg>
+            <h3>Vlastní koupelna</h3>
+            <p>Každý pokoj má vlastní sociální zařízení s koupelnou a sprchovým koutem.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="split section" id="o-nas">
+        <div class="container split__inner">
+          <div class="split__image">
+            <img src="assets/zizka-okoli01.jpg" alt="Okolí penzionu Žižka v Chrudimi">
+          </div>
+          <div class="split__content">
+            <h2>Ubytování pár kroků od centra Chrudimi</h2>
+            <p>V samém středu, nedaleko centra města Chrudim, se nachází nově zrekonstruovaný Penzion Žižka. V bezprostředním okolí je pěší zóna a od penzionu je to jen kousek za nákupem nebo za památkami.</p>
+            <p>V přízemí se nachází bistro a solární studio. Pro rozšíření kapacity je k dispozici také kompletně zrekonstruovaný penzion na adrese Podfortenská 105.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section rooms" id="pokoje">
+        <div class="container">
+          <div class="section-header">
+            <h2>Ubytování ve 2 až 4 lůžkových pokojích</h2>
+            <p>V penzionu je k dispozici pět pokojů s vlastním sociálním zařízením. Vybrané pokoje je možné pronajmout i s kuchyňkou.</p>
+          </div>
+          <div class="rooms__grid">
+            <article class="room-card card">
+              <img src="assets/zizka-pokoj01.jpg" alt="Dvoulůžkový pokoj">
+              <div class="room-card__body">
+                <h3>Dvoulůžkový pokoj</h3>
+                <p>Praktické ubytování pro dva hosty s vlastní koupelnou.</p>
+                <dl>
+                  <div><dt>Kapacita</dt><dd>2 osoby</dd></div>
+                  <div><dt>Lůžka</dt><dd>TV, satelit, internet</dd></div>
+                </dl>
+                <p class="price" data-price-czk="600" data-price-prefix="" data-price-eur-prefix="cca" data-price-suffix="/ pokoj / noc">600 Kč / pokoj / noc</p>
+                <a class="btn btn-outline room-card__cta" href="#rezervace" data-scroll-target="rezervace" data-room-choice="Dvoulůžkový pokoj">Poptat rezervaci</a>
+              </div>
+            </article>
+            <article class="room-card card">
+              <img src="assets/zizka-pokoj02.jpg" alt="Třílůžkový pokoj">
+              <div class="room-card__body">
+                <h3>Třílůžkový pokoj</h3>
+                <p>Pohodlná volba pro menší rodinu nebo přátelský pobyt v centru Chrudimi.</p>
+                <dl>
+                  <div><dt>Kapacita</dt><dd>3 osoby</dd></div>
+                  <div><dt>Lůžka</dt><dd>vlastní koupelna</dd></div>
+                </dl>
+                <p class="price" data-price-czk="750" data-price-prefix="" data-price-eur-prefix="cca" data-price-suffix="/ pokoj / noc">750 Kč / pokoj / noc</p>
+                <a class="btn btn-outline room-card__cta" href="#rezervace" data-scroll-target="rezervace" data-room-choice="Třílůžkový pokoj">Poptat rezervaci</a>
+              </div>
+            </article>
+            <article class="room-card card">
+              <img src="assets/zizka-koupelna01.jpg" alt="Čtyřlůžkový pokoj">
+              <div class="room-card__body">
+                <h3>Čtyřlůžkový pokoj</h3>
+                <p>Více místa pro skupinu nebo rodinu, včetně vlastního sociálního zařízení.</p>
+                <dl>
+                  <div><dt>Kapacita</dt><dd>4 osoby</dd></div>
+                  <div><dt>Lůžka</dt><dd>sprchový kout</dd></div>
+                </dl>
+                <p class="price" data-price-czk="1000" data-price-prefix="" data-price-eur-prefix="cca" data-price-suffix="/ pokoj / noc">1 000 Kč / pokoj / noc</p>
+                <a class="btn btn-outline room-card__cta" href="#rezervace" data-scroll-target="rezervace" data-room-choice="Čtyřlůžkový pokoj">Poptat rezervaci</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="gallery section" id="galerie">
+        <div class="container">
+          <div class="section-header">
+            <h2>Nahlédněte do penzionu</h2>
+          </div>
+          <div class="gallery__grid">
+            <button class="gallery__item gallery__item--tall" type="button"><img src="assets/zizka-penzion01.jpg" alt="Pohled na penzion Žižka"></button>
+            <button class="gallery__item" type="button"><img src="assets/zizka-pokoj01.jpg" alt="Pokoj v penzionu Žižka"></button>
+            <button class="gallery__item" type="button"><img src="assets/zizka-koupelna01.jpg" alt="Koupelna v penzionu Žižka"></button>
+            <button class="gallery__item" type="button"><img src="assets/zizka-bistro01.jpg" alt="Bistro v přízemí penzionu Žižka"></button>
+            <button class="gallery__item" type="button"><img src="assets/zizka-podfortenska05.jpg" alt="Pokoj v penzionu Podfortenská"></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="reviews section" id="recenze">
+        <div class="container reviews__inner">
+          <div class="reviews__intro">
+            <h2>Co hosté říkají po pobytu</h2>
+            <p>Veřejné recenze zmiňují čisté pokoje, útulné prostředí, příjemného majitele a dobrou polohu.</p>
+          </div>
+          <div class="reviews__grid" data-review-rotator>
+            <article class="review-card is-active">
+              <div class="review-card__top">
+                <strong>Jana Vitvarová</strong>
+                <div class="review-card__stars">★★★★★</div>
+              </div>
+              <p>Hosté ocenili příjemné ubytování v klidné části města, blízkost obchodu i hospůdky a pokoj popsali jako „útulný, čistý a voňavý“.</p>
+            </article>
+            <article class="review-card is-active">
+              <div class="review-card__top">
+                <strong>Petr Rebel</strong>
+                <div class="review-card__stars">★★★★★</div>
+              </div>
+              <p>Recenze uvádí „velkou spokojenost“, útulný penzion, krásné místo a chuť zarezervovat pobyt znovu.</p>
+            </article>
+            <article class="review-card is-active">
+              <div class="review-card__top">
+                <strong>p.e.r.r. jones</strong>
+                <div class="review-card__stars">★★★★★</div>
+              </div>
+              <p>Host doporučuje ubytování a vyzdvihuje velmi příjemného majitele, který se o penzion dobře stará.</p>
+            </article>
+          </div>
+          <div class="external-reviews" aria-label="Externí recenze penzionu">
+            <a class="external-review-card external-review-card--firmy" href="https://www.firmy.cz/detail/462963-penzion-zizka-chrudim-ii.html" target="_blank" rel="noopener" aria-label="Otevřít recenze Penzionu Žižka na Firmy.cz">
+              <span class="review-brand review-brand--firmy" aria-hidden="true">
+                <span class="review-brand__mark">F</span>
+                <span>Firmy.cz</span>
+              </span>
+            </a>
+            <a class="external-review-card external-review-card--google" href="https://www.google.com/search?q=Penzion+%C5%BDi%C5%BEka+Chrudim" target="_blank" rel="noopener" aria-label="Vyhledat Penzion Žižka na Google">
+              <span class="review-brand review-brand--google" aria-hidden="true">
+                <span class="google-letter google-letter--blue">G</span><span class="google-letter google-letter--red">o</span><span class="google-letter google-letter--yellow">o</span><span class="google-letter google-letter--blue">g</span><span class="google-letter google-letter--green">l</span><span class="google-letter google-letter--red">e</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer" id="kontakt">
+      <div class="container site-footer__grid">
+        <div class="site-footer__brand">
+          <a class="site-footer__logo-link" href="#top" data-scroll-target="top" aria-label="Penzion Žižka">
+            <img class="site-footer__logo" src="assets/logo-zizka-transparent.png" alt="Penzion Žižka">
+          </a>
+          <p>Ubytování v centru Chrudimi za bezkonkurenční ceny.</p>
+          <p class="site-footer__address">Žižkovo náměstí 106, Chrudim<br>Podfortenská 105, Chrudim</p>
+        </div>
+        <div>
+          <h3>Navigace</h3>
+          <a href="#pokoje" data-scroll-target="pokoje">Pokoje</a>
+          <a href="#galerie" data-scroll-target="galerie">Galerie</a>
+          <a href="vylety/">Výlety</a>
+          <a href="#kontakt" data-scroll-target="kontakt">Kontakt</a>
+        </div>
+        <div>
+          <h3>Kontakt</h3>
+          <a href="tel:+420777210156">+420 777 210 156</a>
+          <a href="mailto:penzionzizkachrudim@seznam.cz">penzionzizkachrudim@seznam.cz</a>
+          <span>Žižkovo náměstí 106, Chrudim</span>
+          <span>Podfortenská 105, Chrudim</span>
+        </div>
+        <div>
+          <h3>Rezervace</h3>
+          <a class="footer-booking" href="#rezervace" data-scroll-target="rezervace">Poptávka rezervace</a>
+        </div>
+      </div>
+      <div class="container site-footer__bottom">
+        © Penzion Žižka. Všechna práva vyhrazena.
+      </div>
+    </footer>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <button class="lightbox__close" type="button" aria-label="Zavřít galerii">×</button>
+      <img src="" alt="">
+    </div>
+
+    <div class="reservation-modal" id="reservation-modal" aria-hidden="true">
+      <div class="reservation-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="reservation-modal-title">
+        <button class="reservation-modal__close" type="button" aria-label="Zavřít formulář">×</button>
+        <h2 id="reservation-modal-title">Doplňte kontaktní údaje</h2>
+        <p class="reservation-modal__lead">Vyplňte formulář a my vám co nejdříve potvrdíme dostupnost termínu. Dostupnost termínu vám potvrdíme e-mailem nebo telefonicky.</p>
+
+        <form class="contact-form reservation-modal__form" id="reservation-modal-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+          <input type="hidden" name="access_key" value="b597baa7-552e-48f5-9959-a1a86a87e292">
+          <input type="hidden" name="subject" value="Nová poptávka rezervace z webu Penzionu Žižka">
+          <input type="hidden" name="from_name" value="Web Penzion Žižka">
+          <input type="checkbox" name="botcheck" style="display: none;">
+          <input type="hidden" name="Datum příjezdu" id="modal-arrival">
+          <input type="hidden" name="Datum odjezdu" id="modal-departure">
+          <input type="hidden" name="Počet osob" id="modal-guests">
+          <input type="hidden" name="Typ pokoje" id="modal-room">
+          <input type="hidden" name="Snídaně" id="modal-breakfast">
+          <input type="hidden" name="Upozornění" value="Toto není automaticky potvrzená rezervace. Host čeká na potvrzení dostupnosti ze strany penzionu.">
+          <textarea name="message" id="modal-message-summary" hidden></textarea>
+
+          <div class="form-grid">
+            <label>
+              Jméno a příjmení
+              <input type="text" name="name" autocomplete="name" maxlength="120" required>
+            </label>
+            <label>
+              E-mail
+              <input type="email" name="email" autocomplete="email" maxlength="180" required>
+            </label>
+            <label>
+              Telefon
+              <input type="tel" name="phone" autocomplete="tel" maxlength="40" required>
+            </label>
+            <label class="form-grid__full">
+              Poznámka
+              <textarea name="note" rows="4" maxlength="1000" placeholder="Přání ohledně pokoje nebo další dotaz."></textarea>
+              <small>Do poznámky prosím neuvádějte citlivé údaje, například zdravotní údaje, rodná čísla nebo čísla dokladů.</small>
+            </label>
+          </div>
+
+          <label class="reservation-modal__gdpr">
+            <input type="checkbox" name="privacy_acknowledged" value="Beru na vědomí zpracování osobních údajů za účelem vyřízení mé poptávky rezervace." required>
+            <span>Beru na vědomí zpracování osobních údajů za účelem vyřízení mé poptávky rezervace.</span>
+          </label>
+
+          <p class="reservation-modal__privacy">Osobní údaje použijeme pouze pro vyřízení vaší poptávky rezervace a související komunikaci. Údaje nepoužíváme pro marketing. <a href="privacy-policy.html" target="_blank" rel="noopener">Informace o zpracování osobních údajů</a></p>
+          <p class="reservation-modal__privacy">Odesláním formuláře nevzniká automaticky potvrzená rezervace. Rezervace je platná až po potvrzení ze strany penzionu.</p>
+          <p class="form-message" id="reservation-modal-message" role="status" aria-live="polite"></p>
+          <button class="btn btn-primary" type="submit">Odeslat poptávku rezervace</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
